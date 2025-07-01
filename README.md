@@ -1,28 +1,41 @@
-# 🇮🇳 Hindi OCR & AI Text Processor
+# � Universal OCR & AI Text Processor
 
-A powerful Next.js application that processes Hindi text images using AI-powered OCR, transliteration, translation, and detailed analysis with comprehensive download functionality.
+A powerful Next.js application that processes text images in **any language** using AI-powered OCR, automatic language detection, transliteration, translation, and detailed analysis.
 
 ## ✨ Features
 
-### 🔍 **Smart Text Detection**
-- **Instant Detection**: Quickly identifies if an image contains Hindi/Devanagari text
-- **Early Stop**: Immediately notifies users if no Hindi text is found, saving processing time
+### 🔍 **Smart Text & Language Detection**
+- **Universal Text Recognition**: Automatically detects and extracts text from any language
+- **Language Identification**: Identifies the specific language of the detected text
+- **Early Stop**: Immediately notifies users if no readable text is found, saving processing time
 - **Multi-format Support**: Supports JPG, PNG, GIF, and other common image formats (up to 10MB)
 
-### 📝 **Comprehensive Text Processing**
-1. **OCR Extraction**: Extracts Hindi text from images using Google Gemini Vision AI
-2. **Romanization**: Converts Hindi text to Roman script (transliteration)
-3. **English Translation**: Provides accurate English translation
-4. **Content Analysis**: Identifies content type (poem, story, sign, etc.)
-5. **Detailed Breakdown**: Line-by-line or stanza-by-stanza analysis with meanings
+### 🌐 **Comprehensive Language Support**
+**The application supports ALL major world languages including:**
+- **Asian Languages**: Hindi, Chinese (Simplified/Traditional), Japanese, Korean, Thai, Arabic, Hebrew, etc.
+- **European Languages**: Spanish, French, German, Italian, Russian, Greek, Portuguese, Dutch, etc.
+- **Indian Languages**: Hindi, Bengali, Tamil, Telugu, Marathi, Gujarati, Punjabi, Malayalam, etc.  
+- **Other Scripts**: Arabic, Persian, Urdu, Thai, Burmese, Khmer, Mongolian, Tibetan, etc.
+- **Latin-based Languages**: English, Spanish, French, Portuguese, Italian, German, and many more
 
-### 💾 **Professional PDF Reports**
-- **One-Click Download**: Download all results as a formatted PDF report
-- **Professional Layout**: Color-coded sections with proper typography
-- **Multi-page Support**: Automatically handles lengthy content across pages
-- **Complete Information**: Includes original text, transliteration, translation, and analysis
-- **Metadata Included**: Processing date, filename, and content type
-- **Print-Ready**: High-quality formatting suitable for printing or sharing
+### 📝 **Comprehensive Text Processing**
+1. **OCR Extraction**: Extracts text from images using Google Gemini Vision AI
+2. **Language Detection**: Automatically identifies the language and provides language code
+3. **Romanization**: Converts non-Latin scripts to Roman script (transliteration)
+4. **English Translation**: Provides accurate English translation for any detected language
+5. **Content Analysis**: Identifies content type (poem, story, sign, etc.)
+6. **Detailed Breakdown**: Section-by-section analysis with meanings
+5. **Detailed Breakdown**: Stanza-by-stanza analysis with proper formatting:
+   - ● Original text lines with transliteration (if applicable)
+   - ○ English meanings for each line
+   - Clear section/stanza grouping and structure
+
+### 🎯 **Enhanced Analysis Format**
+- **Structured Output**: Each section/stanza is clearly labeled and grouped
+- **Multi-Script Display**: Original text with romanized transliteration (when applicable)
+- **Line-by-Line Meanings**: Individual explanations for better understanding
+- **Professional Formatting**: Clean, readable layout with proper spacing
+- **Language-Aware Processing**: Adapts analysis style based on detected language
 
 ## 🚀 Getting Started
 
@@ -35,7 +48,7 @@ A powerful Next.js application that processes Hindi text images using AI-powered
 1. **Clone the repository**
    ```bash
    git clone <repository-url>
-   cd poem-ai-indhic
+   cd universal-ocr-ai-processor
    ```
 
 2. **Install dependencies**
@@ -49,13 +62,13 @@ A powerful Next.js application that processes Hindi text images using AI-powered
    GEMINI_API_KEY=your_gemini_api_key_here
    ```
 
-4. **Run the development server**
+4. **Start the development server**
    ```bash
    npm run dev
    ```
 
 5. **Open your browser**
-   Navigate to [http://localhost:3000](http://localhost:3000)
+   Navigate to `http://localhost:3000`
 
 ## 🎯 How to Use
 
@@ -67,46 +80,85 @@ A powerful Next.js application that processes Hindi text images using AI-powered
 ### Step 2: Process
 - Click "Extract Text & Process"
 - Watch real-time progress through 5 processing steps:
-  1. **Analyzing Image** - Scanning for Hindi text
-  2. **Extracting Text** - Reading Hindi characters  
+  1. **Analyzing Image** - Detecting language and scanning text
+  2. **Extracting Text** - Reading text characters  
   3. **Transliteration** - Converting to Roman script
   4. **Translation** - Translating to English
   5. **Analysis** - Analyzing content and meaning
 
 ### Step 3: View Results
 After processing, you'll see three organized sections:
-- **📜 Original Hindi Text**: Extracted text in Devanagari script
-- **🔤 Romanized Transliteration**: Hindi text in Roman characters
-- **🌍 Translation & Analysis**: English translation with detailed breakdown
+- **📜 Original Text**: Extracted text in the detected language
+- **🔤 Romanized Transliteration**: Text in Roman characters (if applicable)
+- **🌍 Translation & Analysis**: English translation with structured analysis
 
-### Step 4: Download PDF Report
-- Click the "� Download PDF Report" button
-- Get a professionally formatted PDF with all processed information
-- Includes color-coded sections, proper formatting, and metadata
+## 📋 Analysis Format Examples
+
+### For Hindi Text:
+```
+Section 1:
+● मैं तुम-सबकी ओर निहार रहा हूँ, (Main tum-sabakī ora nihāra rahā hūṅ,)
+○ Meaning: I am gazing towards all of you,
+● स्थान मुझे भी दो तुम अपने बीच; (Sthāna mujhe bhī dō tum apanē bīch;)
+○ Meaning: Give me a place too, amongst yourselves;
+```
+
+### For Arabic Text:
+```
+Section 1:
+● مرحبا بكم في عالم الذكاء الاصطناعي (Marhaban bikum fi alam al-dhaka' al-istinaei)
+○ Meaning: Welcome to the world of artificial intelligence
+```
+
+### For Chinese Text:
+```
+Section 1:
+● 人工智能的未来 (Réngōng zhìnéng de wèilái)
+○ Meaning: The future of artificial intelligence
+```
+
+### For Japanese Text:
+```
+Section 1:
+● こんにちは世界 (Konnichiwa sekai)
+○ Meaning: Hello world
+```
+
+### For Russian Text:
+```
+Section 1:
+● Добро пожаловать в будущее (Dobro pozhalovat' v budushcheye)
+○ Meaning: Welcome to the future
+```
+
+- **● (Bullet)**: Original text line with transliteration (when applicable)
+- **○ (Circle)**: English meaning for each line
+- **Clear Section Grouping**: Each section is properly labeled and separated
 
 ## 🔧 What the App Can Process
 
 ### ✅ **Supported Content Types**
-- **Poetry**: Hindi poems, shayari, verses
+- **Poetry**: Poems, verses in any language
 - **Literature**: Stories, articles, essays
-- **Signs**: Street signs, shop boards, notices
-- **Handwritten Text**: Clear handwritten Hindi text
+- **Signs**: Street signs, shop boards, notices in any script
+- **Handwritten Text**: Clear handwritten text in various languages
 - **Printed Material**: Books, newspapers, documents
-- **Religious Texts**: Sanskrit/Hindi religious content
-- **Educational Content**: Textbooks, worksheets
+- **Religious Texts**: Texts in Sanskrit, Arabic, Hebrew, etc.
+- **Educational Content**: Textbooks, worksheets in any language
 
 ### ✅ **Processing Capabilities**
-- **Accurate OCR**: High-precision text recognition
+- **Accurate OCR**: High-precision text recognition for multiple scripts
+- **Language Detection**: Automatic identification of 100+ languages
 - **Context-Aware Translation**: Understands cultural and literary context
 - **Literary Analysis**: Explains metaphors, themes, and meanings
-- **Grammar Insights**: Identifies poetic devices and language patterns
+- **Grammar Insights**: Identifies linguistic patterns and structures
 - **Cultural References**: Explains cultural and historical references
 
 ### ❌ **Limitations**
 - Requires clear, readable text (avoid very blurry or damaged images)
 - Best results with high-contrast images
 - May struggle with very stylized or decorative fonts
-- Limited to Hindi/Devanagari script (will detect and reject other languages)
+- Processing time varies based on text complexity and language
 
 ## 🛠️ Technical Details
 
@@ -120,107 +172,4 @@ After processing, you'll see three organized sections:
 - `POST /api/upload` - Main processing endpoint
   - Accepts multipart form data with image file
   - Returns structured JSON with all processing results
-  - Implements early Hindi text detection
-
-### Performance Features
-- **Smart Detection**: Quick initial scan to avoid unnecessary processing
-- **Optimized UI**: Minimal animations and clean interface
-- **Error Handling**: Comprehensive error messages and recovery
-- **File Validation**: Size and format checks before processing
-
-## 📱 User Experience
-
-### Clean Interface
-- **Professional Design**: Clean, modern UI without excessive animations
-- **Clear Instructions**: Step-by-step guidance for users
-- **Visual Feedback**: Real-time processing status
-- **Error Messages**: Clear, actionable error messages
-
-### Accessibility
-- **Keyboard Navigation**: Full keyboard support
-- **Screen Reader Friendly**: Proper ARIA labels and semantic HTML
-- **High Contrast**: Clear visual distinction between elements
-- **Responsive Design**: Works on desktop, tablet, and mobile
-
-## 🔐 Privacy & Security
-
-- **No Data Storage**: Images and text are not stored on servers
-- **Secure Processing**: All processing happens through encrypted connections
-- **API Key Protection**: Environment variables protect sensitive keys
-- **Client-Side Preview**: Image preview happens locally in browser
-
-## 🚨 Error Handling
-
-The app handles various scenarios gracefully:
-- **No File Selected**: Clear prompt to select an image
-- **Wrong File Type**: Validation message for non-image files
-- **File Too Large**: Size limit notification (10MB max)
-- **No Hindi Text**: Immediate detection and user notification  
-- **API Errors**: Network and processing error recovery
-- **Timeout Issues**: Graceful handling of slow connections
-
-## 🎨 PDF Download Features
-
-### What's Included in PDF Reports
-- **Professional Header**: Blue header with app title and branding
-- **Document Information**: Processing date, filename, content type
-- **Color-Coded Sections**: 
-  - 📜 **Amber**: Original Hindi Text section
-  - 🔤 **Green**: Romanized Transliteration section  
-  - 🌍 **Blue**: English Translation section
-  - 📊 **Purple**: Detailed Analysis section
-- **Proper Typography**: Clean fonts with appropriate sizing
-- **Multi-page Support**: Automatic page breaks for lengthy content
-- **Professional Footer**: Page numbers and app attribution
-
-### PDF Format Features
-- **High Quality**: Vector-based text for crisp printing
-- **Proper Margins**: Professional document formatting
-- **Unicode Support**: Full support for Hindi/Devanagari characters
-- **Searchable Text**: All text is selectable and searchable
-- **Print-Ready**: Optimized for both screen viewing and printing
-- **Compact Size**: Efficient file size without quality loss
-
-## 🔧 Development
-
-### Available Scripts
-```bash
-npm run dev      # Start development server
-npm run build    # Build for production
-npm run start    # Start production server
-npm run lint     # Run ESLint
-```
-
-### Key Dependencies
-- **@google/generative-ai**: Google Gemini AI integration
-- **next**: React framework  
-- **typescript**: Type safety
-- **tailwindcss**: Utility-first CSS
-- **react**: UI library
-- **jspdf**: PDF generation for download reports
-- **html2canvas**: Canvas utilities for PDF generation
-
-### Getting a Gemini API Key
-1. Visit [Google AI Studio](https://makersuite.google.com/app/apikey)
-2. Create a new API key
-3. Add it to your `.env.local` file as `GEMINI_API_KEY`
-
-## 📝 License
-
-This project is open source and available under the MIT License.
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit issues and pull requests.
-
-## 🔧 Troubleshooting
-
-### Common Issues
-- **API Key Issues**: Ensure your Gemini API key is correctly set in `.env.local`
-- **Image Upload Issues**: Check file size (max 10MB) and format (JPG, PNG, GIF)
-- **No Results**: Ensure the image contains clear, readable Hindi text
-- **Network Errors**: Check internet connection and API key validity
-
----
-
-**Built with ❤️ for the Hindi language community**
+  - Implements universal text detection and language identification

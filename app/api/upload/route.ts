@@ -47,15 +47,15 @@ export async function POST(request: NextRequest) {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-    // Create a prompt for Gemini to first quickly check if there's Hindi text
+    // Create a prompt for Gemini to first quickly check for any readable text
     const quickCheckPrompt = `
-      Look at this image and determine if there is any Hindi/Devanagari script text present.
+      Look at this image and determine if there is any readable text present in any language.
       
       Respond with ONLY:
-      - "HINDI_FOUND" if you see any Hindi/Devanagari characters
-      - "NO_HINDI" if there's no Hindi/Devanagari text (English, other languages, or no text)
+      - "TEXT_FOUND" if you see any readable text in any language
+      - "NO_TEXT" if there's no readable text or the image is not clear enough
       
-      Be quick and decisive - just look for the characteristic curved shapes of Devanagari script.
+      Be quick and decisive - just look for any text characters, letters, or script symbols.
     `;
 
     try {
@@ -67,49 +67,60 @@ export async function POST(request: NextRequest) {
         },
       };
 
-      // First, do a quick check for Hindi text
+      // First, do a quick check for any readable text
       const quickCheckResult = await model.generateContent([quickCheckPrompt, imagePart]);
       const quickCheckResponse = quickCheckResult.response.text().trim();
 
       console.log('Quick check result:', quickCheckResponse);
 
-      // If no Hindi text found, return immediately
-      if (quickCheckResponse.includes('NO_HINDI')) {
+      // If no readable text found, return immediately
+      if (quickCheckResponse.includes('NO_TEXT')) {
         return NextResponse.json({
           success: true,
           noTextFound: true,
-          message: 'No Hindi text was detected in the image. The image appears to contain English or other non-Hindi content.',
+          message: 'No readable text was detected in the image. Please try with a clearer image containing text.',
           quickStop: true
         });
       }
 
-      // If Hindi text is found, proceed with full analysis
+      // If text is found, proceed with full analysis
       const detailedPrompt = `
-        You are an expert in Hindi language and OCR. Please analyze this image and provide a structured response.
+        You are an expert multilingual OCR and translation specialist. Please analyze this image and provide a structured response.
         
-        Since Hindi text has been detected, provide your response in this EXACT format:
+        Since text has been detected, provide your response in this EXACT format:
         
-        EXTRACTED_HINDI_TEXT:
-        [Write the complete Hindi text exactly as it appears in the image]
+        EXTRACTED_TEXT:
+        [Write the complete text exactly as it appears in the image, preserving all formatting and line breaks]
+        
+        DETECTED_LANGUAGE:
+        [Full name of the detected language (e.g., "Hindi", "Spanish", "Arabic", "Chinese", "English", etc.)]
+        
+        LANGUAGE_CODE:
+        [ISO language code (e.g., "hi" for Hindi, "es" for Spanish, "ar" for Arabic, "zh" for Chinese, "en" for English, etc.)]
         
         ROMANIZED_TRANSLITERATION:
-        [Provide the complete romanized transliteration of the Hindi text using standard IAST or simple roman characters]
+        [If the detected language uses a non-Latin script, provide romanized transliteration using standard romanization. If already in Latin script, write "N/A - Already in Latin script"]
         
         ENGLISH_TRANSLATION:
-        [Provide a complete English translation of the text]
+        [Provide a complete English translation of the text. If the text is already in English, write "N/A - Original text is in English"]
         
         CONTENT_TYPE:
-        [Specify what type of content this is: poem, story, article, sign, etc.]
+        [Specify what type of content this is: poem, story, article, sign, book page, handwritten note, etc.]
         
         DETAILED_ANALYSIS:
-        For each stanza (or section if prose), follow this EXACT format:
+        For each stanza/paragraph/section, follow this EXACT format with proper grouping:
         
-        Stanza [number]:
-        ● [Hindi line], ([Transliteration in parentheses])
+        Section 1:
+        ● [Original text line], ([Transliteration/romanization if applicable])
         ○ Meaning: [English meaning of this line]
-        ● [Next Hindi line], ([Transliteration in parentheses])
+        ● [Next original text line], ([Transliteration/romanization if applicable])
         ○ Meaning: [English meaning of this line]
-        [Continue for all lines in the stanza]
+        
+        Section 2:
+        ● [Original text line], ([Transliteration/romanization if applicable])
+        ○ Meaning: [English meaning of this line]
+        
+        [Continue this pattern for all sections]
         
         Example format:
         Stanza 1:
@@ -118,12 +129,20 @@ export async function POST(request: NextRequest) {
         ● स्थान मुझे भी दो तुम अपने बीच; (Sthāna mujhe bhī dō tum apanē bīch;)
         ○ Meaning: Give me a place too, amongst yourselves;
         
-        IMPORTANT FORMATTING RULES:
-        - Use exactly ● (bullet) for Hindi lines with transliteration in parentheses
+        Stanza 2:
+        ● कुछ तो कहो कि मैं यहाँ हूँ! (Kuch to kaho ki main yahāṅ hūṅ!)
+        ○ Meaning: Say something, for I am here!
+        
+        CRITICAL FORMATTING RULES:
+        - Use exactly ● (bullet) for original text lines with transliteration/romanization in parentheses (if applicable)
         - Use exactly ○ (circle) for meanings that start with "Meaning:"
-        - Analyze every single line of each stanza
-        - If it's prose, treat each paragraph as a section instead of stanzas
-        - Maintain consistent formatting throughout
+        - Group lines by section with clear "Section X:" headers
+        - Analyze every single line of each section
+        - If it's poetry, use "Stanza" instead of "Section"
+        - If it's prose, treat each paragraph as a section
+        - Maintain consistent spacing and formatting throughout
+        - Do not use any other bullet or numbering styles
+        - For languages already in Latin script, you may omit transliteration in parentheses
         
         Be accurate and thorough in your analysis. Make sure to format everything clearly under the specified sections.
       `;
@@ -136,8 +155,18 @@ export async function POST(request: NextRequest) {
       console.log('Gemini Vision analysis completed');
 
       // Parse the structured response from detailed analysis
-      const extractHindiText = (text: string) => {
-        const match = text.match(/EXTRACTED_HINDI_TEXT:\s*([\s\S]*?)(?=\n(?:ROMANIZED_TRANSLITERATION|$))/i);
+      const extractOriginalText = (text: string) => {
+        const match = text.match(/EXTRACTED_TEXT:\s*([\s\S]*?)(?=\n(?:DETECTED_LANGUAGE|$))/i);
+        return match ? match[1].trim() : '';
+      };
+
+      const extractDetectedLanguage = (text: string) => {
+        const match = text.match(/DETECTED_LANGUAGE:\s*([\s\S]*?)(?=\n(?:LANGUAGE_CODE|$))/i);
+        return match ? match[1].trim() : '';
+      };
+
+      const extractLanguageCode = (text: string) => {
+        const match = text.match(/LANGUAGE_CODE:\s*([\s\S]*?)(?=\n(?:ROMANIZED_TRANSLITERATION|$))/i);
         return match ? match[1].trim() : '';
       };
 
@@ -162,7 +191,9 @@ export async function POST(request: NextRequest) {
       };
 
       const structuredResponse = {
-        hindiText: extractHindiText(geminiResponse),
+        originalText: extractOriginalText(geminiResponse),
+        detectedLanguage: extractDetectedLanguage(geminiResponse),
+        languageCode: extractLanguageCode(geminiResponse),
         romanizedText: extractRomanizedText(geminiResponse),
         englishTranslation: extractEnglishTranslation(geminiResponse),
         contentType: extractContentType(geminiResponse),

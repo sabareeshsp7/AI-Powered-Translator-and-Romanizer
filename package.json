@@ -1,5 +1,5 @@
 {
-  "name": "poem-ai-indhic",
+  "name": "universal-ocr-ai-processor",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,8 +10,6 @@
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
-    "html2canvas": "^1.4.1",
-    "jspdf": "^3.0.1",
     "next": "15.3.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -20,7 +18,6 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
-    "@types/jspdf": "^1.3.3",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
