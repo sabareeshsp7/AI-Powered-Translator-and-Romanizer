@@ -131,10 +131,6 @@ Section 1:
 ○ Meaning: Welcome to the future
 ```
 
-- **● (Bullet)**: Original text line with transliteration (when applicable)
-- **○ (Circle)**: English meaning for each line
-- **Clear Section Grouping**: Each section is properly labeled and separated
-
 ## 🔧 What the App Can Process
 
 ### ✅ **Supported Content Types**
