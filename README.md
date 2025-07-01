@@ -1,4 +1,4 @@
-# � Universal OCR & AI Text Processor
+#  Universal OCR & AI Text Processor
 
 A powerful Next.js application that processes text images in **any language** using AI-powered OCR, automatic language detection, transliteration, translation, and detailed analysis.
 
