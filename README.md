@@ -48,7 +48,7 @@ A powerful Next.js application that processes text images in **any language** us
 1. **Clone the repository**
    ```bash
    git clone <repository-url>
-   cd universal-ocr-ai-processor
+   cd AI-Powered-Translator-and-Romanizer
    ```
 
 2. **Install dependencies**
