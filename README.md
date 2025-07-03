@@ -1,4 +1,4 @@
-# � Universal OCR & AI Text Processor
+#  Universal OCR & AI Text Processor
 
 A powerful Next.js application that processes text images in **any language** using AI-powered OCR, automatic language detection, transliteration, translation, and detailed analysis.
 
@@ -48,7 +48,7 @@ A powerful Next.js application that processes text images in **any language** us
 1. **Clone the repository**
    ```bash
    git clone <repository-url>
-   cd universal-ocr-ai-processor
+   cd AI-Powered-Translator-and-Romanizer
    ```
 
 2. **Install dependencies**
@@ -130,10 +130,6 @@ Section 1:
 ● Добро пожаловать в будущее (Dobro pozhalovat' v budushcheye)
 ○ Meaning: Welcome to the future
 ```
-
-- **● (Bullet)**: Original text line with transliteration (when applicable)
-- **○ (Circle)**: English meaning for each line
-- **Clear Section Grouping**: Each section is properly labeled and separated
 
 ## 🔧 What the App Can Process
 
