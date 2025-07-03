@@ -169,3 +169,35 @@ Section 1:
   - Accepts multipart form data with image file
   - Returns structured JSON with all processing results
   - Implements universal text detection and language identification
+
+### Key Dependencies
+- **@google/generative-ai**: Google Gemini AI integration
+- **@vercel/analytics**: Page views and visitor tracking
+- **next**: React framework  
+- **typescript**: Type safety
+- **tailwindcss**: Utility-first CSS
+- **react**: UI library
+
+### Analytics & Monitoring
+- **Vercel Analytics**: Integrated for tracking page views and visitor statistics
+- **Real-time Metrics**: Monitor application usage and performance
+- **Privacy-Focused**: No personal data collection, respects user privacy
+
+## 🚀 Deployment
+
+### Step 3: Deploy & Visit your Site
+When you deploy this application to Vercel (or any hosting platform):
+
+1. **Deploy your changes** to your hosting platform
+2. **Visit the deployment** to start collecting page views
+3. **Analytics will automatically start tracking** visitor data
+4. **Check your Vercel dashboard** for analytics insights
+
+> **Note**: If you don't see analytics data after 30 seconds, please check for content blockers and try navigating between different sections of your site.
+
+## 📊 Analytics Features
+- **Page Views**: Track how many times pages are viewed
+- **Unique Visitors**: Monitor unique user sessions
+- **Geographic Data**: See where your users are located
+- **Performance Metrics**: Monitor Core Web Vitals
+- **Real-time Data**: View analytics in real-time on Vercel dashboard
